@@ -4,7 +4,7 @@ import { swagger } from "@elysiajs/swagger";
 import v1 from "./v1/group"
 
 const app = new Elysia()
-                  .get("/", () => "Hello World")
+                  .get("/", () => "OK")
                   .use(v1)
                   .use(swagger({path: '/swagger'}))
                   .listen(3000);
