@@ -8,9 +8,6 @@ const discordClient = new DiscordWebhook(process.env.WEBHOOK_URL);
 
 const callback = new Elysia()
     .get('/callback', ({ query, set }) => {
-
-        console.log(query)
-
         axios({
             method: "post",
             url: "https://api.vercel.com/v2/oauth/access_token",
@@ -25,8 +22,6 @@ const callback = new Elysia()
             }
         })
         .then(response => {
-            console.log(response.data);
-
             console.log(`[VercelWave]: Succesfully registered new team. ID: ${query.teamId} `);
             discordClient.execute({
                 embeds: [
@@ -35,14 +30,18 @@ const callback = new Elysia()
                         description: 'The `VercelWave` integration has been successfully linked',
                         fields: [
                             {
-                                name: 'Some field',
-                                value: 'Some field value',
+                                name: 'User ID',
+                                value: `${response.data.user_id}`,
+                            },
+                            {
+                                name: 'Team ID',
+                                value: `${response.data.team_id}`,
                             }
                         ]
                     }
                 ]
             }).then((response) => {
-                console.log('Successfully sent webhook.')
+                console.log('[VercelWave]: Successfully sent link webhook.')
             })
         })
         .catch(err => {
