@@ -3,6 +3,11 @@ import { swagger } from "@elysiajs/swagger";
 
 import v1 from "./v1/group"
 
+/*if(process.env.WEBHOOK_URL) {
+  console.log('Please specify a WEBHOOK_URL Environment Variable...')
+  process.exit(1)
+}*/
+
 const app = new Elysia()
                   .get("/", () => "OK")
                   .use(v1)
