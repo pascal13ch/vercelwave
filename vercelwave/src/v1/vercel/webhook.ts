@@ -21,7 +21,7 @@ const vercel = new Elysia()
                             },
                             title: `VercelWave`,
                             url: "",
-                            description: `A new ${String(body.payload.deployment.name)} has been triggered`,
+                            description: `A new \`${String(body.payload.deployment.name)}\` Deployment has been triggered`,
                             fields: [
                                 {
                                     name: "Location",
@@ -59,7 +59,7 @@ const vercel = new Elysia()
                             },
                             title: `VercelWave`,
                             url: "",
-                            description: `A new ${String(body.payload.deployment.name)} has been deployed`,
+                            description: `A new \`${String(body.payload.deployment.name)}\` Deployment has been deployed`,
                             fields: [
                                 {
                                     name: "Location",
