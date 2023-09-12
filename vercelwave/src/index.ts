@@ -8,6 +8,8 @@ import v1 from "./v1/group"
   process.exit(1)
 }*/
 
+const PORT = process.env.PORT || 3000;
+
 const app = new Elysia()
                   .get("/", () => "OK")
                   .use(v1)
@@ -17,7 +19,7 @@ const app = new Elysia()
                       version: '1.0.0'
                     }
                   }}))
-                  .listen(3000);
+                  .listen(PORT);
 
 console.log(
   `🚀 VercelWave is running at ${app.server?.hostname}:${app.server?.port}`
