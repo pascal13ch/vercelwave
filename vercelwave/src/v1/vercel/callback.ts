@@ -2,8 +2,6 @@ import Elysia from "elysia";
 import axios from "axios"
 import DiscordWebhook from "discord-webhook-ts";
 
-const page = ``
-
 const discordClient = new DiscordWebhook(process.env.WEBHOOK_URL);
 
 const callback = new Elysia()

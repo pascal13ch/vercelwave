@@ -1,12 +1,10 @@
 import Elysia from "elysia";
 
 
-import vercel from "./vercel/vercel"
-import discord from "./discord/discord";
+import vercel from "./vercel/vercel";
 
 const v1 = new Elysia({ prefix: 'v1'})
-    .use(vercel)    
-    .use(discord)
+    .use(vercel);    
 
 
 export default v1;
