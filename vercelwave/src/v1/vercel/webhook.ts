@@ -7,71 +7,81 @@ const discordClient = new DiscordWebhook(process.env.WEBHOOK_URL);
 
 
 const vercel = new Elysia()
-    .post('/webhook', ({body}) => {
+    .post('/webhook', ({ body }) => {
         console.log(body);
-        switch(body.payload.type) {
+        switch (body.type) {
             case "deployment.created": {
                 discordClient.execute({
-                    "author": {
-                        "name": `Deployment ${body.payload.deployment.id} created`,
-                        "url": `${body.payload.deployment.inspectorUrl}`,
-                        "icon_url": "blob:https://vercel.com/3350cdaf-648d-4370-a0dc-f6b7a24217d3"
-                    },
-                    "title": `VercelWave`,
-                    "url": "",
-                    "description": `A new ${body.payload.deployment.name} has been triggered`,
-                    "timestamp": `${body.payload.createdAt}`,
-                    "fields": [
+                    embeds: [
                         {
-                          "name": "Location",
-                          "value": `${body.payload.deployment.regions[0]}`,
-                          "inline": true
-                        },
-                        {
-                          "name": "Target",
-                          "value": `${body.payload.deployment.target}`,
-                          "inline": true
-                        },
-                        {
-                          "name": "URL",
-                          "value": `[TargetURL](${body.payload.deployment.url})`,
-                          "inline": true
+                            author: {
+                                name: `Deployment #${String(body.payload.deployment.id)} created`,
+                                url: `${String(body.payload.deployment.inspectorUrl)}`,
+                                icon_url: "https://assets.vercel.com/image/upload/front/favicon/vercel/180x180.png"
+                            },
+                            title: `VercelWave`,
+                            url: "",
+                            description: `A new ${String(body.payload.deployment.name)} has been triggered`,
+                            fields: [
+                                {
+                                    name: "Location",
+                                    value: `${String(body.payload.regions[0])}`,
+                                    inline: true
+                                },
+                                {
+                                    name: "Target",
+                                    value: `${String(body.payload.target)}`,
+                                    inline: true
+                                },
+                                {
+                                    name: "URL",
+                                    value: `[\`TargetURL\`](https://${String(body.payload.url)})`,
+                                    inline: true
+                                }
+                            ],
                         }
-                    ],
+                    ]
+                }).then((response) => {
+                    console.log('[VercelWave]: Successfully sent deploymed.created webhook.')
                 })
                 break;
             }
 
             case "deployment.succeeded": {
                 discordClient.execute({
-                    "author": {
-                        "name": `Deployment ${body.payload.deployment.id} created`,
-                        "url": `${body.payload.deployment.inspectorUrl}`,
-                        "icon_url": "blob:https://vercel.com/3350cdaf-648d-4370-a0dc-f6b7a24217d3"
-                    },
-                    "title": `VercelWave`,
-                    "url": "",
-                    "description": `${body.payload.deployment.name} has been passed`,
-                    "timestamp": `${body.payload.createdAt}`,
-                    "fields": [
+                    embeds: [
                         {
-                          "name": "Location",
-                          "value": `${body.payload.deployment.regions[0]}`,
-                          "inline": true
-                        },
-                        {
-                          "name": "Target",
-                          "value": `${body.payload.deployment.target}`,
-                          "inline": true
-                        },
-                        {
-                          "name": "URL",
-                          "value": `[URL](${body.payload.deployment.url})`,
-                          "inline": true
+                            color: '3066993',
+                            author: {
+                                name: `Deployment #${String(body.payload.deployment.id)} succeed`,
+                                url: `${String(body.payload.deployment.inspectorUrl)}`,
+                                icon_url: "https://assets.vercel.com/image/upload/front/favicon/vercel/180x180.png"
+                            },
+                            title: `VercelWave`,
+                            url: "",
+                            description: `A new ${String(body.payload.deployment.name)} has been deployed`,
+                            fields: [
+                                {
+                                    name: "Location",
+                                    value: `${String(body.payload.regions[0])}`,
+                                    inline: true
+                                },
+                                {
+                                    name: "Target",
+                                    value: `${String(body.payload.target)}`,
+                                    inline: true
+                                },
+                                {
+                                    name: "URL",
+                                    value: `[\`TargetURL\`](https://${String(body.payload.url)})`,
+                                    inline: true
+                                }
+                            ],
                         }
-                    ],
+                    ]
+                }).then((response) => {
+                    console.log('[VercelWave]: Successfully sent deploymed.succeeded webhook.')
                 })
-                break;
                 break;
             }
 
@@ -79,7 +89,9 @@ const vercel = new Elysia()
                 console.log(`[VercelWave]: No Discord Webhook found for ${body.payload.type}`)
             }
         }
-        
-    }, {detail: {deprecated: false, tags: ["Vercel"]}})
+
+        return "OK";
+
+    }, { detail: { deprecated: false, tags: ["Vercel"] } })
 
 export default vercel;
