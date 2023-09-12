@@ -9,8 +9,7 @@ const discordClient = new DiscordWebhook(process.env.WEBHOOK_URL);
 const vercel = new Elysia()
     .post('/webhook', ({body}) => {
         console.log(body);
-        
-        switch(body.type) {
+        switch(body.payload.type) {
             case "deployment.created": {
                 discordClient.execute({
                     "author": {
