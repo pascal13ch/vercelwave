@@ -3,10 +3,28 @@ import { swagger } from "@elysiajs/swagger";
 
 import v1 from "./v1/group"
 
-/*if(process.env.WEBHOOK_URL) {
-  console.log('Please specify a WEBHOOK_URL Environment Variable...')
+if(!process.env.WEBHOOK_URL) {
+  console.log('[AppWave]: Please specify a WEBHOOK_URL Environment Variable...')
   process.exit(1)
-}*/
+}
+
+if(!process.env.CLIENT_ID) {
+  console.log('[AppWave]: Please specify a CLIENT_ID Environment Variable...')
+  process.exit(1)
+}
+
+if(!process.env.CLIENT_SECRET) {
+  console.log('[AppWave]: Please specify a CLIENT_SECRET Environment Variable...')
+  process.exit(1)
+}
+
+if(!process.env.REDIRECT_URI) {
+  console.log('[AppWave]: Please specify a REDIRECT_URI Environment Variable...')
+  process.exit(1)
+}
+
+
+console.log(`Using ${process.env.WEBHOOK_URL} as URL... `)
 
 const PORT = process.env.PORT || 3000;
 

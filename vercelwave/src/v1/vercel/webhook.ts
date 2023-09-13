@@ -53,7 +53,7 @@ const vercel = new Elysia()
                         {
                             color: '3066993',
                             author: {
-                                name: `Deployment #${String(body.payload.deployment.id)} succeed`,
+                                name: `Deployment #${String(body.payload.deployment.id)} succeeded`,
                                 url: `${String(body.payload.deployment.inspectorUrl)}`,
                                 icon_url: "https://assets.vercel.com/image/upload/front/favicon/vercel/180x180.png"
                             },
