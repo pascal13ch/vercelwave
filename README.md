@@ -9,7 +9,7 @@
 
 VercelWave is a self-hosted interface that provides a connection between Vercel and webhook providers. VercelWave was developed to enable a feature that is not available by default in Vercel.
 
-### Installation
+# Installation
 
 ## Create Vercel Integration
 
@@ -40,7 +40,7 @@ services:
 | Variable      | Description                                                           | Required | Default |
 |---------------|-----------------------------------------------------------------------|:--------:|:-------:|
 | PORT          | Port over which the backend should be started                         | No       | 3000    |
-| WEBHOOK_URL   | Disord Webhook URL (Secer Settings > Integrations > Create Webhook )  | Yes      | -       |
+| WEBHOOK_URL   | Discord Webhook URL (Server Settings > Integrations > Create Webhook )  | Yes      | -       |
 | CLIENT_ID     | Vercel Integration ClientID                                           | Yes      | -       |
 | CLIENT_SECRET | Vercel Integration Client Secret                                      | Yes      | -       |
 | REDIRECT_URI  | Vercel Integration Redirect URL                                       | Yes      | -       |
@@ -49,6 +49,8 @@ services:
 ## Contribute
 
 Contributions are welcome! Please see our [Contribution Guidelines](CONTRIBUTING.md) for more information.
+
+## Ideas
 
 ## License
 
